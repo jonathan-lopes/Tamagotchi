@@ -1,0 +1,1 @@
+Tamagotchi em C
