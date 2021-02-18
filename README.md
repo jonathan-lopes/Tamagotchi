@@ -1,1 +1,1 @@
-Tamagotchi em C
+#Tamagotchi 
