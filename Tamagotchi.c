@@ -4,8 +4,8 @@
 #include <string.h>
 
 /*Table ASCII*/
-#define BORDER_COL 176 
-#define LINE 205 
+#define BORDER_COL 166
+#define LINE 150
 
 struct virtualPet
 {
@@ -29,10 +29,13 @@ int main()
 	pet.hunger = 20;
 	pet.age = 0;
 
-	short int answer;
+	short int answer, relationship = 0;
+	char ownerName[31];
 
 	printf("Qual o nome que deseja colocar no seu bichinho? ");
 	fgets(pet.name, 30, stdin);
+	printf("Qual seu nome? ");
+	gets_s(ownerName, 30);
 
 	while (pet.health > 0 && pet.hunger < 100)
 	{
@@ -40,6 +43,7 @@ int main()
 		changeHealth(-2);
 		changeHumor();
 		changeAge();
+		relationship++;
 		menu();
 		scanf_s("%hd", &answer);
 		printf("\n");
@@ -130,19 +134,49 @@ int main()
 			}
 			else
 			{
-				if (pet.hunger <= 69 && pet.hunger > 39)
+				if (pet.health <= 69 && pet.health > 39)
 				{
 					printf("Acho que estou mal, atchim! \nSaúde: %d%%", pet.health);
 				}
 				else
 				{
-					if (pet.hunger <= 39)
+					if (pet.health <= 39)
 					{
 						printf("Estou doente! \nSaúde: %d%%", pet.health);
 					}
 				}
 			}
 
+			system("pause>nul");
+			break;
+
+		case 8:
+			if (pet.hunger <= 39 && pet.health > 69 && relationship == 1)
+			{
+				printf("Estou bem %s, cuide de mim ta bom!", ownerName);
+			}
+			else
+			{
+				if (pet.hunger <= 39 && pet.health > 69 && relationship > 1)
+				{
+					printf("Oi %s, continue cuidando de mim!", ownerName);
+				}
+				else
+				{
+					if ((pet.hunger <= 69 && pet.hunger > 39) && (pet.health <= 69 && pet.health > 39) && relationship > 1)
+					{
+						printf("Ei %s, acho que você não está cuidando de mim direito!", ownerName);
+					}
+					else
+					{
+						if ((pet.hunger > 39) && (pet.health < 39) && relationship > 1)
+						{
+							printf("%s por que você não está cuidando de mim, não me ama mais?", ownerName);
+						}
+					}
+				}
+			}
+			
 			system("pause>nul");
 			break;
 
@@ -194,6 +228,7 @@ void menu() {
 	printf("5- visualizar idade \n");
 	printf("6- Visualizar fome \n");
 	printf("7- Visualizar saúde \n");
+	printf("8- Visualizar relacionamento \n");
 	printf("Resposta: ");
 }
 
